@@ -8,34 +8,32 @@
  * Return the answer in any order.
  */
 
-TreeNode *generateForReq(TreeNode *parent, int i, int x) {
+TreeNode * generateAllTree(int head_number, int max) {
 
-    if (parent == nullptr)
+    auto *root = new TreeNode(head_number);
+
+    if (head_number == 0)
         return nullptr;
 
-    if (i > x)
-        return parent;
+    if (head_number > max)
+        return nullptr;
 
-    TreeNode head(x);
+    while (head_number != max) {
 
-    if (parent->val < head.val) {
-        parent->right = &head;
-    } else {
-        parent->left = &head;
+        root->left = generateAllTree(head_number - 1, max);
+        root->right = generateAllTree(head_number, max);
+        head_number = head_number - 1;
+
     }
-
-    generateForReq(&head, i + 1, x);
-
-    return nullptr;
+    return root;
 }
+
 
 vector<TreeNode *> Solution::generateTrees(int x) {
 
     vector<TreeNode *> toReturn;
     for (int i = 1; i <= x; i++) {
-        TreeNode parent(i);
-
-        toReturn.push_back(generateForReq(&parent, i, x));
+        toReturn.push_back(generateAllTree(i, x));
     }
 
     return toReturn;
