@@ -9,15 +9,7 @@ class Solution {
     bool triple_zero = false;
 
     bool noAlreadyIn(vector<vector<int>> result, vector<int> add) {
-        vector<int> triple_zero_vector = {0, 0, 0};
-        if (triple_zero == false &&
-            std::equal(add.begin(), add.end(), triple_zero_vector.begin())) {
-            triple_zero = !triple_zero;
-            return true;
-        }
-
         int cpt = 0;
-
         for (auto &it : result) {
             cpt = 0;
             for (vector<int>::size_type i = 0; i < add.size(); i++) {
